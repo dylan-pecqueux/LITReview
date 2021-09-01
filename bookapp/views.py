@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse
-from .models import Ticket
+from .models import Ticket, UserFollows
 from .forms import TicketForm
 from django.conf import settings
 
@@ -45,3 +45,31 @@ def new_ticket(request):
 def feed(request):
     ticket_list = Ticket.objects.order_by('-time_created')
     return render(request, 'bookapp/feed.html', {'tickets': ticket_list, 'media_url':settings.MEDIA_URL})
+
+@login_required(login_url='/')
+def subscriptions(request):
+    followed_by = UserFollows.objects.filter(user=request.user)
+    sub = UserFollows.objects.filter(followed_user=request.user)
+    print(sub)
+    print(followed_by)
+    if request.method == 'POST':
+        print("!!!!!!!!!!!!!!!!!")
+        try:
+            User = get_user_model()
+            search_user = User.objects.get(username=request.POST['search'])
+        except (KeyError, User.DoesNotExist):
+            return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by, 'message': "Aucun utilisateur trouvé"})
+        else:
+            already_exist = [i for i in UserFollows.objects.filter(user=search_user)]
+            if search_user != request.user and not already_exist:
+                follow = UserFollows(user=search_user, followed_user=request.user)
+                follow.save()
+                return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by, 'message': "Utilisateur ajouté !"})
+            else:
+                return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by, 'message': "Utilisateur deja ajouté !"})
+    else:
+        return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by})
+
+@login_required(login_url='/')
+def subscribe(request):
+    pass

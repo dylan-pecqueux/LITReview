@@ -1,0 +1,40 @@
+{% extends 'bookapp/base.html' %}
+
+
+{% block page %}
+    <section class="search">
+        <h2>Suivre d'autres utilisateurs</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="search" placeholder="Nom d'utilisateur">
+            <input type="submit" value="envoyer">
+        </form>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </section>
+    <section class="sub">
+        <h2>Abonnements</h2>
+        {% if sub %}
+            <ul>
+                {% for sub in sub %}
+                    <li>{{ sub.user }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun abonnement</p>
+        {% endif %}
+    </section>
+    <section class="sub">
+        <h2>Abonnés</h2>
+        {% if followed_by %}
+            <ul>
+                {% for user in followed_by %}
+                    <li>{{ user.followed_user }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun abonné</p>
+        {% endif %}
+    </section>
+{% endblock %}
