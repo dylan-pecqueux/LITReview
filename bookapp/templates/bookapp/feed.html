@@ -1,6 +1,5 @@
 {% extends 'bookapp/base.html' %}
 
-
 {% block page %}
     {% if tickets %}
         <ul>
@@ -9,6 +8,7 @@
                 <h2>{{ticket.title}}</h2>
                 <p>{{ticket.description}}</p>
                 <img src="{{media_url}}{{ticket.image}}">
+                <a href="{% url 'bookapp:new_review' ticket.pk %}">Créer une critique</a>
             </li>
         {% endfor %}
         </ul>

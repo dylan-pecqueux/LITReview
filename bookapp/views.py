@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse
 from .models import Ticket, UserFollows
-from .forms import TicketForm
+from .forms import TicketForm, ReviewForm
 from django.conf import settings
 
 
@@ -50,8 +50,6 @@ def feed(request):
 def subscriptions(request):
     followed_by = UserFollows.objects.filter(user=request.user)
     sub = UserFollows.objects.filter(followed_user=request.user)
-    print(sub)
-    print(followed_by)
     if request.method == 'POST':
         try:
             User = get_user_model()
@@ -75,4 +73,19 @@ def delete_sub(request, pk):
     if request.user == sub_to_delete.followed_user:
         sub_to_delete.delete()
     return redirect(reverse('bookapp:subscriptions'))
+
+@login_required(login_url='/')
+def new_review(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, ticket=ticket, user=request.user)
+        if form.is_valid():
+            m = form.save(commit=False)
+            m.user = request.user
+            m.ticket = ticket
+            m.save()
+            return redirect(reverse('bookapp:feed'))
+    else:
+        form = ReviewForm()
+    return render(request, 'bookapp/new_review.html', {'form': form, 'ticket': ticket})
 

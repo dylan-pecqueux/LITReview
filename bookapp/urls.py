@@ -10,4 +10,5 @@ urlpatterns = [
     path('feed/', views.feed, name='feed'),
     path('subscriptions/', views.subscriptions, name='subscriptions'),
     path('subsciptions/<pk>/delete/', views.delete_sub, name='delete_sub'),
+    path('ticket/<pk>/new_review/', views.new_review, name='new_review'),
 ]
