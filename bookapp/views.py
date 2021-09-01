@@ -53,7 +53,6 @@ def subscriptions(request):
     print(sub)
     print(followed_by)
     if request.method == 'POST':
-        print("!!!!!!!!!!!!!!!!!")
         try:
             User = get_user_model()
             search_user = User.objects.get(username=request.POST['search'])
@@ -71,5 +70,9 @@ def subscriptions(request):
         return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by})
 
 @login_required(login_url='/')
-def subscribe(request):
-    pass
+def delete_sub(request, pk):
+    sub_to_delete = UserFollows.objects.get(pk=pk)
+    if request.user == sub_to_delete.followed_user:
+        sub_to_delete.delete()
+    return redirect(reverse('bookapp:subscriptions'))
+

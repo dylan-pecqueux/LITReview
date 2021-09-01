@@ -18,7 +18,14 @@
         {% if sub %}
             <ul>
                 {% for sub in sub %}
-                    <li>{{ sub.user }}</li>
+                    <li>
+                        {{ sub.user }}
+                        <form action="{% url 'bookapp:delete_sub' sub.pk %}" action="post">
+                            {% csrf_token %}
+                            <input type="hidden" value={{sub.pk}} name="pk">
+                            <input type="submit" value="Désabonner">
+                        </form>
+                    </li>
                 {% endfor %}
             </ul>
         {% else %}
