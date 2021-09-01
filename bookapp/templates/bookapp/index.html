@@ -9,7 +9,7 @@
 <body>
     <h1>Book Review</h1>
     {% if next %}
-    <p>Vous ne pouvez pas accéder à cette page</p>
+        <p>Vous ne pouvez pas accéder à cette page</p>
     {% endif %}
     <div>
         <h2>Inscrivez-vous maintenant</h2>
@@ -19,9 +19,16 @@
         <h2>Connectez-vous</h2>
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
-
-            <p>Nom d'utilisateur :{{ form.username }}</p>
-            <p>Mot de passe :{{ form.password }}</p>
+            <p>
+                Nom d'utilisateur :
+                <input type="text" name="username" autofocus="" autocapitalize="none" 
+                autocomplete="username" maxlength="150" required="" id="id_username">
+            </p>
+            <p>
+                Mot de passe :
+                <input type="password" name="password" autocomplete="current-password" 
+                required="" id="id_password">
+            </p>
 
             <input type="submit" value="Se connecter">
             <input type="hidden" name="next" value="{{ next }}">

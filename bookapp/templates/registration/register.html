@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>Enregistrez-vous</h2>
-        <form action="{% url 'bookapp:register' %}" method="post">
+        <form action="{% url 'bookapp:register' %}" method="POST">
             {% csrf_token %}
 
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}

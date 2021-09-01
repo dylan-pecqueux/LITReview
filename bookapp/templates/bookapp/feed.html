@@ -1,0 +1,18 @@
+{% extends 'bookapp/base.html' %}
+
+
+{% block page %}
+    {% if tickets %}
+        <ul>
+        {% for ticket in tickets %}
+            <li>
+                <h2>{{ticket.title}}</h2>
+                <p>{{ticket.description}}</p>
+                <img src="{{media_url}}{{ticket.image}}">
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun tickets</p>
+    {% endif %}
+{% endblock %}
