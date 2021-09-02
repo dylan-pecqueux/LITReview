@@ -4,20 +4,17 @@
     <section class="link">
         <a href="{% url 'bookapp:new_ticket_and_review' %}">Créer une critique</a>
     </section>
-    {% if tickets %}
+    {% if posts %}
         <ul>
-        {% for ticket in tickets %}
-            <li>
-                <h2>{{ticket.title}}</h2>
-                <p>{{ticket.description}}</p>
-                {% if ticket.image %}
-                    <img src="{{media_url}}{{ticket.image}}">
+            {% for post in posts %}
+                {% if post.content_type == 'TICKET' %}
+                    {% include 'bookapp/ticket_snippet.html' %}
+                {% elif post.content_type == 'REVIEW' %}
+                    {% include 'bookapp/review_snippet.html' %}
                 {% endif %}
-                <a href="{% url 'bookapp:new_review' ticket.pk %}">Créer une critique</a>
-            </li>
-        {% endfor %}
+            {% endfor %}
         </ul>
     {% else %}
-        <p>Aucun tickets</p>
+        <p>Aucun posts</p>
     {% endif %}
 {% endblock %}

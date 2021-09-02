@@ -1,0 +1,8 @@
+<li>
+    <h2>{{post.title}}</h2>
+    <p>{{post.description}}</p>
+    {% if post.image %}
+        <img src="{{media_url}}{{post.image}}">
+    {% endif %}
+    <a href="{% url 'bookapp:new_review' post.pk %}">Créer une critique</a>
+</li>

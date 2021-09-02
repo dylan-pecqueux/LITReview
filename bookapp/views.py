@@ -1,9 +1,11 @@
+from itertools import chain
+from django.db.models import CharField, Value, Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse
-from .models import Ticket, UserFollows
+from .models import Ticket, UserFollows, Review
 from .forms import TicketForm, ReviewForm
 from django.conf import settings
 
@@ -43,8 +45,21 @@ def new_ticket(request):
 
 @login_required(login_url='/')
 def feed(request):
-    ticket_list = Ticket.objects.order_by('-time_created')
-    return render(request, 'bookapp/feed.html', {'tickets': ticket_list, 'media_url':settings.MEDIA_URL})
+    user_followed = UserFollows.objects.filter(followed_user=request.user)
+    my_filter_qs = Q()
+    for user in user_followed:
+        my_filter_qs = my_filter_qs | Q(user=user.user)
+    my_filter_qs |= my_filter_qs | Q(user=request.user)
+    reviews = Review.objects.filter(my_filter_qs)
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    tickets = Ticket.objects.filter(my_filter_qs)
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    posts = sorted(
+        chain(reviews, tickets), 
+        key=lambda post: post.time_created, 
+        reverse=True
+    )
+    return render(request, 'bookapp/feed.html', {'posts': posts, 'media_url':settings.MEDIA_URL})
 
 @login_required(login_url='/')
 def subscriptions(request):
@@ -108,4 +123,8 @@ def new_ticket_and_review(request):
         ticket_form = TicketForm()
         review_form = ReviewForm()
     return render(request, 'bookapp/new_ticket_and_review.html', {'ticket_form': ticket_form, 'review_form': review_form})
+
+@login_required(login_url='/')
+def posts(request):
+    pass
 
