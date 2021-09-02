@@ -89,3 +89,23 @@ def new_review(request, pk):
         form = ReviewForm()
     return render(request, 'bookapp/new_review.html', {'form': form, 'ticket': ticket})
 
+@login_required(login_url='/')
+def new_ticket_and_review(request):
+    if request.method == 'POST':
+        ticket_form = TicketForm(request.POST, request.FILES, user=request.user)
+        if ticket_form.is_valid():
+            save_ticket = ticket_form.save(commit=False)
+            save_ticket.user = request.user
+            review_form = ReviewForm(request.POST, ticket=save_ticket, user=request.user)
+            if review_form.is_valid():
+                save_ticket.save()
+                save_review = review_form.save(commit=False)
+                save_review.user = request.user
+                save_review.ticket = save_ticket
+                save_review.save()
+                return redirect(reverse('bookapp:feed'))
+    else:
+        ticket_form = TicketForm()
+        review_form = ReviewForm()
+    return render(request, 'bookapp/new_ticket_and_review.html', {'ticket_form': ticket_form, 'review_form': review_form})
+

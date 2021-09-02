@@ -1,0 +1,10 @@
+{% extends 'bookapp/base.html' %}
+
+{% block page %}
+    <form method="post" action="{% url 'bookapp:new_ticket_and_review' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ ticket_form.as_p }}
+            {{ review_form.as_p }}
+        <input type="submit" value="Ajouter">
+    </form>
+{% endblock %}

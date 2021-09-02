@@ -11,4 +11,5 @@ urlpatterns = [
     path('subscriptions/', views.subscriptions, name='subscriptions'),
     path('subsciptions/<pk>/delete/', views.delete_sub, name='delete_sub'),
     path('ticket/<pk>/new_review/', views.new_review, name='new_review'),
+    path('new_review/', views.new_ticket_and_review, name='new_ticket_and_review'),
 ]
