@@ -1,10 +1,6 @@
 {% extends 'bookapp/base.html' %}
 
 {% block page %}
-    <section class="link">
-        <a href="{% url 'bookapp:new_ticket' %}">Créer ticket</a>
-        <a href="{% url 'bookapp:new_ticket_and_review' %}">Créer une critique</a>
-    </section>
     {% if posts %}
         <ul>
             {% for post in posts %}

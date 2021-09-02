@@ -126,5 +126,14 @@ def new_ticket_and_review(request):
 
 @login_required(login_url='/')
 def posts(request):
-    pass
+    reviews = Review.objects.filter(user=request.user)
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    tickets = Ticket.objects.filter(user=request.user)
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    posts = sorted(
+        chain(reviews, tickets), 
+        key=lambda post: post.time_created, 
+        reverse=True
+    )
+    return render(request, 'bookapp/posts.html', {'posts': posts, 'media_url':settings.MEDIA_URL})
 
