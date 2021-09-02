@@ -1,6 +1,16 @@
 <li>
-    <h2>{{post.headline}}</h2>
-    <p>{{post.user.username}}</p>
-    <p>{{post.rating}}</p>
-    <p>{{post.body}}</p>
+    <div class="review">
+        {% if request.user == post.user %}
+            <p>vous avez publié une critique</p>
+        {% else %}
+            <p>{{post.user.username}} a publié une critique</p>
+        {% endif %}
+        <h2>{{post.headline}}</h2>
+        <p>{{post.rating}}</p>
+        <p>{{post.body}}</p>
+    </div>
+    <div class="ticket">
+        <p>Ticket - {{post.ticket.user.username}}</p>
+        <p>{{post.ticket.title}}</p>
+    </div>
 </li>
