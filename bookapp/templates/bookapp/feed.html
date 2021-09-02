@@ -10,7 +10,9 @@
             <li>
                 <h2>{{ticket.title}}</h2>
                 <p>{{ticket.description}}</p>
-                <img src="{{media_url}}{{ticket.image}}">
+                {% if ticket.image %}
+                    <img src="{{media_url}}{{ticket.image}}">
+                {% endif %}
                 <a href="{% url 'bookapp:new_review' ticket.pk %}">Créer une critique</a>
             </li>
         {% endfor %}
