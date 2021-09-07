@@ -9,7 +9,6 @@
     {% if post.image %}
         <img src="{{media_url}}{{post.image}}">
     {% endif %}
-    {% if post not in ticket_response %}
-        <a href="{% url 'bookapp:new_review' post.pk %}">Créer une critique</a>
-    {% endif %}
+    <a href="{% url 'bookapp:update_ticket' post.pk %}">Modifier</a>
+    <a href="{% url 'bookapp:delete_ticket' post.pk %}">Delete</a>
 </li>

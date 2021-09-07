@@ -1,0 +1,9 @@
+{% extends 'bookapp/base.html' %}
+
+{% block page %}
+    <form method="POST" action="{% url 'bookapp:update_ticket' ticket.pk %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Modifier">
+    </form>
+{% endblock %}

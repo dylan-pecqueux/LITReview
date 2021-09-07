@@ -159,8 +159,25 @@ def update_review(request, pk):
 
 @login_required(login_url='/')
 def delete_review(request, pk):
-    review_to_delete = Review.objects.get(pk=pk)
+    review_to_delete = get_object_or_404(Review, pk=pk)
     if request.user == review_to_delete.user:
         review_to_delete.delete()
     return redirect(reverse('bookapp:posts'))
-    
+
+@login_required(login_url='/')
+def update_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    context = {'ticket': ticket}
+    form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('bookapp:posts'))
+    context["form"] = form
+    return render(request, 'bookapp/update_ticket.html', context)
+
+@login_required(login_url='/')
+def delete_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    if request.user == ticket.user:
+        ticket.delete()
+    return redirect(reverse('bookapp:posts'))
