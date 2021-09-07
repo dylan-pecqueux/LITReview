@@ -14,4 +14,5 @@ urlpatterns = [
     path('new_review/', views.new_ticket_and_review, name='new_ticket_and_review'),
     path('posts/', views.posts, name='posts'),
     path('review/<pk>/update', views.update_review, name='update_review'),
+    path('review/<pk>/delete', views.delete_review, name='delete_review'),
 ]

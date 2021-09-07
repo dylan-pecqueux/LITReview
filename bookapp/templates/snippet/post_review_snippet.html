@@ -14,4 +14,5 @@
         <p>{{post.ticket.title}}</p>
     </div>
     <a href="{% url 'bookapp:update_review' post.pk %}">Modifier</a>
+    <a href="{% url 'bookapp:delete_review' post.pk %}">Delete</a>
 </li>
