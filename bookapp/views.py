@@ -107,17 +107,18 @@ def new_review(request, pk):
 @login_required(login_url='/')
 def new_ticket_and_review(request):
     if request.method == 'POST':
-        ticket_form = TicketForm(request.POST, request.FILES, user=request.user)
+        ticket_form = TicketForm(request.POST, request.FILES)
         if ticket_form.is_valid():
             save_ticket = ticket_form.save(commit=False)
             save_ticket.user = request.user
-            review_form = ReviewForm(request.POST, ticket=save_ticket, user=request.user)
+            review_form = ReviewForm(request.POST)
             if review_form.is_valid():
                 save_ticket.save()
-                save_review = review_form.save(commit=False)
-                save_review.user = request.user
-                save_review.ticket = save_ticket
-                save_review.save()
+                rating = review_form.cleaned_data['rating']
+                headline = review_form.cleaned_data['headline']
+                body = review_form.cleaned_data['body']
+                new_review = Review(ticket=save_ticket, rating=rating, headline=headline, body=body, user=request.user)
+                new_review.save()
                 return redirect(reverse('bookapp:feed'))
     else:
         ticket_form = TicketForm()
