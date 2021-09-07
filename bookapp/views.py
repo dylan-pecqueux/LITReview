@@ -45,18 +45,21 @@ def new_ticket(request):
 
 @login_required(login_url='/')
 def feed(request):
+    my_tickets = Ticket.objects.filter(user=request.user)
+    response_to_my_reviews = Review.objects.filter(ticket__in=my_tickets)
+    response_to_my_reviews = response_to_my_reviews.annotate(content_type=Value('REVIEW', CharField()))
     user_followed = UserFollows.objects.filter(followed_user=request.user)
     my_filter_qs = Q()
     for user in user_followed:
         my_filter_qs = my_filter_qs | Q(user=user.user)
     my_filter_qs |= my_filter_qs | Q(user=request.user)
-    reviews = Review.objects.filter(my_filter_qs)
+    reviews = Review.objects.filter(my_filter_qs).exclude(ticket__in=my_tickets)
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
     tickets = Ticket.objects.filter(my_filter_qs)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     ticket_response = [i.ticket for i in Review.objects.filter(user=request.user)]
     posts = sorted(
-        chain(reviews, tickets), 
+        chain(reviews, tickets, response_to_my_reviews), 
         key=lambda post: post.time_created, 
         reverse=True
     )
