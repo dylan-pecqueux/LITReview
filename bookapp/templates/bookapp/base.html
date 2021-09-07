@@ -1,26 +1,30 @@
+{% load sass_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% sass_src 'css/base.scss' %}" rel="stylesheet" type="text/css" />
     <title>Bookapp</title>
 </head>
 <body>
     <header>
         <nav>
-            <a href="{% url 'bookapp:feed' %}"><h1>Bookapp</h1></a>
-            <div>
+            <div class="nav_title">
+                <img src="{% static 'images/logo.png' %}" alt="logo litreview">
+                <a href="{% url 'bookapp:feed' %}" ><h1>LITReview</h1></a>
+            </div>
+            <div class="nav_links">
                 <a href="{% url 'bookapp:posts' %}">Posts</a>
                 <a href="{% url 'bookapp:subscriptions' %}">Abonnements</a>
                 <a href="{% url 'logout' %}">Se déconnecter</a>
             </div>
         </nav>
     </header>
-    <main>
-        {% block page %}
-        {% endblock %}
-    </main>
+    {% block page %}
+    {% endblock %}
     
 </body>
 </html>

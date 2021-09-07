@@ -33,7 +33,7 @@ def register(request):
 @login_required(login_url='/')
 def new_ticket(request):
     if request.method == 'POST':
-        form = TicketForm(request.POST, request.FILES, user=request.user)
+        form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
             m = form.save(commit=False)
             m.user = request.user
@@ -93,7 +93,7 @@ def delete_sub(request, pk):
 def new_review(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk)
     if request.method == 'POST':
-        form = ReviewForm(request.POST, ticket=ticket, user=request.user)
+        form = ReviewForm(request.POST)
         if form.is_valid():
             m = form.save(commit=False)
             m.user = request.user

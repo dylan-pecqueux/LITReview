@@ -1,5 +1,5 @@
-<li>
-    <div class="review">
+<li class="review">
+    <div class="review_post">
         {% if request.user == post.user %}
             <p>vous avez publié une critique</p>
         {% else %}
@@ -9,7 +9,7 @@
         <p>{{post.rating}}</p>
         <p>{{post.body}}</p>
     </div>
-    <div class="ticket">
+    <div class="review_ticket">
         <p>Ticket - {{post.ticket.user.username}}</p>
         <p>{{post.ticket.title}}</p>
     </div>

@@ -1,21 +1,25 @@
 {% extends 'bookapp/base.html' %}
 
 {% block page %}
-    <section class="link">
-        <a href="{% url 'bookapp:new_ticket' %}">Créer ticket</a>
-        <a href="{% url 'bookapp:new_ticket_and_review' %}">Créer une critique</a>
-    </section>
-    {% if posts %}
-        <ul>
-            {% for post in posts %}
-                {% if post.content_type == 'TICKET' %}
-                    {% include 'bookapp/ticket_snippet.html' %}
-                {% elif post.content_type == 'REVIEW' %}
-                    {% include 'bookapp/review_snippet.html' %}
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun posts</p>
-    {% endif %}
+    <main class="feed">
+        <section class="feed_link">
+            <a href="{% url 'bookapp:new_ticket' %}">Créer ticket</a>
+            <a href="{% url 'bookapp:new_ticket_and_review' %}">Créer une critique</a>
+        </section>
+        <section class="feed_posts">
+            {% if posts %}
+                <ul>
+                    {% for post in posts %}
+                        {% if post.content_type == 'TICKET' %}
+                            {% include 'bookapp/ticket_snippet.html' %}
+                        {% elif post.content_type == 'REVIEW' %}
+                            {% include 'bookapp/review_snippet.html' %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun posts</p>
+            {% endif %}
+        </section>
+    </main>
 {% endblock %}
