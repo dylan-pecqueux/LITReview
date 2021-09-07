@@ -11,9 +11,9 @@
                 <ul>
                     {% for post in posts %}
                         {% if post.content_type == 'TICKET' %}
-                            {% include 'bookapp/ticket_snippet.html' %}
+                            {% include 'snippet/ticket_snippet.html' %}
                         {% elif post.content_type == 'REVIEW' %}
-                            {% include 'bookapp/review_snippet.html' %}
+                            {% include 'snippet/review_snippet.html' %}
                         {% endif %}
                     {% endfor %}
                 </ul>

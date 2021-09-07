@@ -1,0 +1,17 @@
+<li class="review">
+    <div class="review_post">
+        {% if request.user == post.user %}
+            <p>vous avez publié une critique</p>
+        {% else %}
+            <p>{{post.user.username}} a publié une critique</p>
+        {% endif %}
+        <h2>{{post.headline}}</h2>
+        <p>{{post.rating}}</p>
+        <p>{{post.body}}</p>
+    </div>
+    <div class="review_ticket">
+        <p>Ticket - {{post.ticket.user.username}}</p>
+        <p>{{post.ticket.title}}</p>
+    </div>
+    <a href="{% url 'bookapp:update_review' post.pk %}">Modifier</a>
+</li>

@@ -13,4 +13,5 @@ urlpatterns = [
     path('ticket/<pk>/new_review/', views.new_review, name='new_review'),
     path('new_review/', views.new_ticket_and_review, name='new_ticket_and_review'),
     path('posts/', views.posts, name='posts'),
+    path('review/<pk>/update', views.update_review, name='update_review'),
 ]

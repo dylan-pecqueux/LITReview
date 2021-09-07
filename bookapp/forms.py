@@ -8,10 +8,8 @@ class TicketForm(forms.ModelForm):
         model = Ticket
         fields = ('title', 'description', 'image')
 
-class ReviewForm(forms.Form):
-    headline = forms.CharField(max_length=128)
-    rating = forms.ChoiceField(
-        widget=forms.RadioSelect,
-        choices=RATINGS_CHOICE,
-    ) 
-    body = forms.CharField(max_length=8192, required=False, widget=forms.Textarea)
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('headline', 'rating', 'body')
+        widgets = {'rating': forms.RadioSelect(choices=RATINGS_CHOICE)}

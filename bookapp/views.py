@@ -104,11 +104,10 @@ def new_review(request, pk):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            rating = form.cleaned_data['rating']
-            headline = form.cleaned_data['headline']
-            body = form.cleaned_data['body']
-            new_review = Review(ticket=ticket, rating=rating, headline=headline, body=body, user=request.user)
-            new_review.save()
+            save_form = form.save(commit=False)
+            save_form.user = request.user
+            save_form.ticket = ticket
+            save_form.save()
             return redirect(reverse('bookapp:feed'))
     else:
         form = ReviewForm()
@@ -124,11 +123,10 @@ def new_ticket_and_review(request):
             review_form = ReviewForm(request.POST)
             if review_form.is_valid():
                 save_ticket.save()
-                rating = review_form.cleaned_data['rating']
-                headline = review_form.cleaned_data['headline']
-                body = review_form.cleaned_data['body']
-                new_review = Review(ticket=save_ticket, rating=rating, headline=headline, body=body, user=request.user)
-                new_review.save()
+                save_review = review_form.save(commit=False)
+                save_review.user = request.user
+                save_review.ticket = save_ticket
+                save_review.save()
                 return redirect(reverse('bookapp:feed'))
     else:
         ticket_form = TicketForm()
@@ -148,3 +146,13 @@ def posts(request):
     )
     return render(request, 'bookapp/posts.html', {'posts': posts, 'media_url':settings.MEDIA_URL})
 
+@login_required(login_url='/')
+def update_review(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+    context = {'review': review}
+    form = ReviewForm(request.POST or None, instance=review)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('bookapp:posts'))
+    context["form"] = form
+    return render(request, 'bookapp/update_review.html', context)

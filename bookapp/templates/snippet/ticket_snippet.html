@@ -1,0 +1,15 @@
+<li class="ticket">
+    {% if request.user == post.user %}
+        <p>vous avez demandé une critique</p>
+    {% else %}
+        <p>{{post.user.username}} a demandé une critique</p>
+    {% endif %}
+    <h2>{{post.title}}</h2>
+    <p>{{post.description}}</p>
+    {% if post.image %}
+        <img src="{{media_url}}{{post.image}}">
+    {% endif %}
+    {% if post not in ticket_response %}
+        <a href="{% url 'bookapp:new_review' post.pk %}">Créer une critique</a>
+    {% endif %}
+</li>
