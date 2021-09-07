@@ -54,12 +54,13 @@ def feed(request):
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
     tickets = Ticket.objects.filter(my_filter_qs)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    ticket_response = [i.ticket for i in Review.objects.filter(user=request.user)]
     posts = sorted(
         chain(reviews, tickets), 
         key=lambda post: post.time_created, 
         reverse=True
     )
-    return render(request, 'bookapp/feed.html', {'posts': posts, 'media_url':settings.MEDIA_URL})
+    return render(request, 'bookapp/feed.html', {'posts': posts, 'media_url':settings.MEDIA_URL, 'ticket_response':ticket_response})
 
 @login_required(login_url='/')
 def subscriptions(request):
@@ -100,10 +101,11 @@ def new_review(request, pk):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            m = form.save(commit=False)
-            m.user = request.user
-            m.ticket = ticket
-            m.save()
+            rating = form.cleaned_data['rating']
+            headline = form.cleaned_data['headline']
+            body = form.cleaned_data['body']
+            new_review = Review(ticket=ticket, rating=rating, headline=headline, body=body, user=request.user)
+            new_review.save()
             return redirect(reverse('bookapp:feed'))
     else:
         form = ReviewForm()
