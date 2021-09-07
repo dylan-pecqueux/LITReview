@@ -70,17 +70,22 @@ def subscriptions(request):
             User = get_user_model()
             search_user = User.objects.get(username=request.POST['search'])
         except (KeyError, User.DoesNotExist):
-            return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by, 'message': "Aucun utilisateur trouvé"})
+            message = "Aucun utilisateur trouvé"
         else:
-            already_exist = [i for i in UserFollows.objects.filter(user=search_user)]
-            if search_user != request.user and not already_exist:
+            already_exist = [i.user for i in UserFollows.objects.filter(followed_user=request.user)]
+            print(already_exist)
+            if search_user != request.user and search_user not in already_exist:
                 follow = UserFollows(user=search_user, followed_user=request.user)
                 follow.save()
-                return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by, 'message': "Utilisateur ajouté !"})
-            else:
-                return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by, 'message': "Utilisateur deja ajouté !"})
+                message = "ajouté"
+            if search_user == request.user:
+                message = "Vous ne pouvez pas vous ajouter vous-même !"
+            if search_user in already_exist:
+                message = "Utilisateur deja ajouté !"
     else:
-        return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by})
+        message = None
+
+    return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by, 'message': message})
 
 @login_required(login_url='/')
 def delete_sub(request, pk):
