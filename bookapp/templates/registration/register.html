@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
-    <h2>Enregistrez-vous</h2>
+{% extends 'bookapp/base.html' %}
+{% load sass_tags %}
+{% load static %}
+
+{% block extrahead %}
+    <link href="{% sass_src 'css/form.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block page %}
+    <main class="register">
+        <h2>Enregistrez-vous</h2>
         <form action="{% url 'bookapp:register' %}" method="POST">
             {% csrf_token %}
 
-            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-            {{ form }}
-
-            <input type="submit" value="S'inscrire">
-            <a href="{% url 'bookapp:index' %}">Retourner</a>
-        </form>   
-</body>
-</html>
+            {{ form.as_p }}
+            <div>
+                <a href="{% url 'bookapp:index' %}" class="btn btn-outline-primary">Retourner</a>
+                <input type="submit" value="S'inscrire" class="btn btn-primary">
+            </div>
+        </form> 
+    </main>  
+{% endblock %}

@@ -1,38 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Book Review</h1>
+{% extends 'bookapp/base.html' %}
+{% load sass_tags %}
+{% load static %}
+
+{% block extrahead %}
+    <link href="{% sass_src 'css/home.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block page %}
     {% if next %}
         <p>Vous ne pouvez pas accéder à cette page</p>
     {% endif %}
-    <div>
-        <h2>Inscrivez-vous maintenant</h2>
-        <a href="{% url 'bookapp:register' %}">S'inscrire</a>
-    </div>
-    <div>
-        <h2>Connectez-vous</h2>
-        <form action="{% url 'login' %}" method="post">
-            {% csrf_token %}
-            <p>
-                Nom d'utilisateur :
-                <input type="text" name="username" autofocus="" autocapitalize="none" 
-                autocomplete="username" maxlength="150" required="" id="id_username">
-            </p>
-            <p>
-                Mot de passe :
-                <input type="password" name="password" autocomplete="current-password" 
-                required="" id="id_password">
-            </p>
+    <main class="home-page">
+        <section class="home-page_register">
+            <h2>Inscrivez-vous maintenant</h2>
+            <a href="{% url 'bookapp:register' %}" class="btn btn-primary">S'inscrire</a>
+        </section>
+        <section class="home-page_separator"></section>
+        <section class="home-page_login">
+            <h2>Connectez-vous</h2>
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <p>
+                    <input type="text" name="username" autofocus="" autocapitalize="none" 
+                    autocomplete="username" maxlength="150" required="" placeholder="Nom d'utilisateur" id="id_username">
+                </p>
+                <p>
+                    <input type="password" name="password" autocomplete="current-password" 
+                    required="" placeholder="Mot de passe" id="id_password">
+                </p>
 
-            <input type="submit" value="Se connecter">
-            <input type="hidden" name="next" value="{{ next }}">
-        </form>
-    </div>
-</body>
-</html>
+                <input type="submit" value="Se connecter" class="btn btn-primary">
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+        </section>
+    </main>
+{% endblock %}

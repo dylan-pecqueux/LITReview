@@ -1,3 +1,50 @@
-.feed_link{
-    background-color: black;
+.feed {
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &_link {
+        margin-bottom: 50px;
+        a {
+            border: 1px solid;
+            padding: 5px;
+        }
+    }
+}
+
+.feed_posts, .page-posts{
+    p {
+        font-size: 18px;
+    }
+    .ticket {
+        padding: 10px;
+        border: 1px solid;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        img {
+            width: 300px;
+        }
+    }
+    .review {
+        padding: 10px;
+        border: 1px solid;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        &_ticket {
+            margin-top: 10px;
+            border: 1px solid;
+            padding: 10px;
+        }
+    }
+}
+
+.page-posts{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

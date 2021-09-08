@@ -1,4 +1,10 @@
 {% extends 'bookapp/base.html' %}
+{% load sass_tags %}
+{% load static %}
+
+{% block extrahead %}
+    <link href="{% sass_src 'css/feed.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block page %}
     <main class="feed">

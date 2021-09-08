@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse
 from .models import Ticket, UserFollows, Review
-from .forms import TicketForm, ReviewForm
+from .forms import TicketForm, ReviewForm, AccountCreationForm
 from django.conf import settings
 
 
@@ -15,7 +15,7 @@ def index(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = AccountCreationForm(request.POST)
 
         if form.is_valid():
             form.save()
@@ -25,7 +25,7 @@ def register(request):
             login(request, user)
             return redirect(reverse('bookapp:feed'))
     else:
-        form = UserCreationForm()
+        form = AccountCreationForm()
         
     context = {'form': form}
     return render(request, 'registration/register.html', context)
