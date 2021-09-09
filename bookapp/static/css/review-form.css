@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; }
+
+ul {
+  list-style: none; }
+
+a {
+  text-decoration: none;
+  color: black; }
+  a:hover {
+    color: white; }
+
+header nav {
+  background-color: #20b2e8;
+  height: 60px;
+  display: flex;
+  align-items: center; }
+  header nav .nav_title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    left: 43%; }
+    header nav .nav_title img {
+      margin-right: 10px;
+      width: 50px; }
+  header nav .nav_links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%; }
+    header nav .nav_links a {
+      color: #2f2f2f;
+      margin-right: 20px;
+      font-size: 20px; }
+      header nav .nav_links a:hover {
+        color: white; }
+
+.btn {
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  box-sizing: border-box; }
+
+.btn-light {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  box-sizing: border-box; }
+
+.btn-primary {
+  border: 1px solid #20b2e8;
+  background-color: #20b2e8;
+  color: white;
+  box-sizing: border-box; }
+  .btn-primary:hover {
+    border: 1px solid #20b2e8;
+    color: #20b2e8;
+    background-color: white;
+    box-sizing: border-box; }
+
+.btn-outline-primary {
+  border: 1px solid #20b2e8;
+  color: #20b2e8;
+  background-color: white;
+  box-sizing: border-box; }
+  .btn-outline-primary:hover {
+    border: 1px solid #20b2e8;
+    background-color: #20b2e8;
+    color: white;
+    box-sizing: border-box; }
+
+.ticket-review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0; }
+  .ticket-review_ticket {
+    margin-top: 40px;
+    border: 1px solid #20b2e8;
+    padding: 20px 40px; }
+    .ticket-review_ticket_form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px; }
+      .ticket-review_ticket_form p {
+        display: flex;
+        flex-direction: column; }
+        .ticket-review_ticket_form p label {
+          margin-bottom: 10px; }
+        .ticket-review_ticket_form p input[type=text] {
+          border: 1px solid #2f2f2f;
+          outline: none;
+          border-radius: 8px;
+          width: 600px;
+          height: 40px;
+          padding: 0 10px;
+          margin-bottom: 30px; }
+          .ticket-review_ticket_form p input[type=text]:focus {
+            border: 1px solid #20b2e8; }
+        .ticket-review_ticket_form p textarea {
+          border: 1px solid #2f2f2f;
+          outline: none;
+          border-radius: 8px;
+          width: 600px;
+          padding: 10px 10px;
+          margin-bottom: 30px;
+          resize: none; }
+          .ticket-review_ticket_form p textarea:focus {
+            border: 1px solid #20b2e8; }
+        .ticket-review_ticket_form p input[type=file] {
+          width: 600px; }
+  .ticket-review_review {
+    border: 1px solid #20b2e8;
+    border-top: none;
+    padding: 20px 40px; }
+    .ticket-review_review_form {
+      margin-top: 50px; }
+      .ticket-review_review_form ul {
+        margin: 10px 0 30px 0;
+        display: flex;
+        justify-content: space-around; }
+      .ticket-review_review_form p {
+        display: flex;
+        flex-direction: column; }
+        .ticket-review_review_form p label {
+          margin-bottom: 10px; }
+        .ticket-review_review_form p input[type=text] {
+          border: 1px solid #2f2f2f;
+          outline: none;
+          border-radius: 8px;
+          width: 600px;
+          height: 40px;
+          padding: 0 10px;
+          margin-bottom: 30px; }
+          .ticket-review_review_form p input[type=text]:focus {
+            border: 1px solid #20b2e8; }
+        .ticket-review_review_form p textarea {
+          border: 1px solid #2f2f2f;
+          outline: none;
+          border-radius: 8px;
+          width: 600px;
+          padding: 10px 10px;
+          margin-bottom: 30px;
+          resize: none; }
+          .ticket-review_review_form p textarea:focus {
+            border: 1px solid #20b2e8; }
+        .ticket-review_review_form p input[type=file] {
+          width: 600px; }
+    .ticket-review_review_btn {
+      display: flex;
+      justify-content: flex-end; }
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+/*# sourceMappingURL=review-form.css.map */

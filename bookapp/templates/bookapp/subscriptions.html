@@ -1,47 +1,54 @@
 {% extends 'bookapp/base.html' %}
+{% load sass_tags %}
+{% load static %}
 
+{% block extrahead %}
+    <link href="{% sass_src 'css/subscriptions.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block page %}
-    <section class="search">
-        <h2>Suivre d'autres utilisateurs</h2>
-        <form method="post">
-            {% csrf_token %}
-            <input type="text" name="search" placeholder="Nom d'utilisateur">
-            <input type="submit" value="envoyer">
-        </form>
-        {% if message %}
-            <p>{{ message }}</p>
-        {% endif %}
-    </section>
-    <section class="sub">
-        <h2>Abonnements</h2>
-        {% if sub %}
-            <ul>
-                {% for sub in sub %}
-                    <li>
-                        {{ sub.user }}
-                        <form action="{% url 'bookapp:delete_sub' sub.pk %}" action="post">
-                            {% csrf_token %}
-                            <input type="hidden" value={{sub.pk}} name="pk">
-                            <input type="submit" value="Désabonner">
-                        </form>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Aucun abonnement</p>
-        {% endif %}
-    </section>
-    <section class="sub">
-        <h2>Abonnés</h2>
-        {% if followed_by %}
-            <ul>
-                {% for user in followed_by %}
-                    <li>{{ user.followed_user }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Aucun abonné</p>
-        {% endif %}
-    </section>
+    <main class="sub">
+        <section class="sub_search">
+            <h2>Suivre d'autres utilisateurs</h2>
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="search" placeholder="Nom d'utilisateur">
+                <input type="submit" value="envoyer" class="btn btn-primary">
+            </form>
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </section>
+        <section class="sub_follow">
+            <h2>Abonnements</h2>
+            {% if sub %}
+                <ul>
+                    {% for sub in sub %}
+                        <li>
+                            {{ sub.user }}
+                            <form action="{% url 'bookapp:delete_sub' sub.pk %}" action="post">
+                                {% csrf_token %}
+                                <input type="hidden" value={{sub.pk}} name="pk">
+                                <input type="submit" value="Désabonner" class="btn-light btn-outline-primary">
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun abonnement</p>
+            {% endif %}
+        </section>
+        <section class="sub_followers">
+            <h2>Abonnés</h2>
+            {% if followed_by %}
+                <ul>
+                    {% for user in followed_by %}
+                        <li>{{ user.followed_user }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun abonné</p>
+            {% endif %}
+        </section>
+    </main>
 {% endblock %}

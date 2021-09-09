@@ -111,7 +111,7 @@ def new_review(request, pk):
             return redirect(reverse('bookapp:feed'))
     else:
         form = ReviewForm()
-    return render(request, 'bookapp/new_review.html', {'form': form, 'ticket': ticket})
+    return render(request, 'bookapp/new_review.html', {'form': form, 'ticket': ticket, 'media_url':settings.MEDIA_URL})
 
 @login_required(login_url='/')
 def new_ticket_and_review(request):
