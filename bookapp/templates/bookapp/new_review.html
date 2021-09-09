@@ -11,12 +11,14 @@
         <h2>Créer une critique</h2>
         <section class="review-form_ticket">
             <p>Vous êtes en train de poster en réponse à</p>
-            <div>
-                <p>{{ ticket.user.username }} a demandé une critique</p>
-                <span>{{ ticket.time_created.time }}, {{ ticket.time_created.date }}</span>
-                <p>{{ ticket.title }}</p>
-                {% if ticket.body %}
-                    <p>{{ ticket.body }}</p>
+            <div class="review-form_ticket_description">
+                <div>
+                    <p><span>{{ ticket.user.username }}</span> a demandé une critique</p>
+                    <p class="review-form_ticket_description_date">{{ ticket.time_created.time }}, {{ ticket.time_created.date }}</p>
+                </div>
+                <h3>{{ ticket.title }}</h3>
+                {% if ticket.description %}
+                    <p>{{ ticket.description }}</p>
                 {% endif %}
                 {% if ticket.image %}
                     <img src="{{media_url}}{{ticket.image}}">
@@ -26,7 +28,7 @@
         <form method="post" action="{% url 'bookapp:new_review' ticket.pk %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Envoyer">
+            <input type="submit" value="Envoyer" class="btn btn-primary">
         </form>
     </main>
 {% endblock %}

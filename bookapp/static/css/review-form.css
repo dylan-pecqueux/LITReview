@@ -156,9 +156,70 @@ header nav {
       justify-content: flex-end; }
 
 .review-form {
+  margin: 50px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center; }
+  .review-form_ticket {
+    width: 650px;
+    margin-top: 40px; }
+    .review-form_ticket_description {
+      margin-top: 10px;
+      border: 1px solid #20b2e8;
+      padding: 10px 20px; }
+      .review-form_ticket_description h3 {
+        margin-bottom: 15px; }
+      .review-form_ticket_description p {
+        margin-bottom: 20px; }
+      .review-form_ticket_description_date {
+        font-size: 13px;
+        color: #20b2e8; }
+      .review-form_ticket_description div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        .review-form_ticket_description div span {
+          color: #20b2e8; }
+      .review-form_ticket_description img {
+        height: 250px; }
+  .review-form form {
+    margin-top: 50px; }
+    .review-form form ul {
+      margin: 10px 0 30px 0;
+      display: flex;
+      justify-content: space-around; }
+    .review-form form p {
+      display: flex;
+      flex-direction: column; }
+      .review-form form p label {
+        margin-bottom: 10px; }
+      .review-form form p input[type=text] {
+        border: 1px solid #2f2f2f;
+        outline: none;
+        border-radius: 8px;
+        width: 600px;
+        height: 40px;
+        padding: 0 10px;
+        margin-bottom: 30px; }
+        .review-form form p input[type=text]:focus {
+          border: 1px solid #20b2e8; }
+      .review-form form p textarea {
+        border: 1px solid #2f2f2f;
+        outline: none;
+        border-radius: 8px;
+        width: 600px;
+        padding: 10px 10px;
+        margin-bottom: 30px;
+        resize: none; }
+        .review-form form p textarea:focus {
+          border: 1px solid #20b2e8; }
+      .review-form form p input[type=file] {
+        width: 600px; }
+    .review-form form .btn {
+      float: right; }
+  .review-form_btn {
+    display: flex;
+    justify-content: flex-end; }
 
 /*# sourceMappingURL=review-form.css.map */

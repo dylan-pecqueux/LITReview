@@ -104,8 +104,88 @@
 }
 
 .review-form {
+    margin: 50px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    &_ticket {
+        width: 650px;
+        margin-top: 40px;
+        &_description {
+            margin-top: 10px;
+            border: 1px solid $primary-color;
+            padding: 10px 20px;
+            h3 {
+                margin-bottom: 15px;;
+            }
+            p {
+                margin-bottom: 20px;
+            }
+            &_date {
+                font-size: 13px;
+                color: $primary-color;
+            }
+            div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                span {
+                    color: $primary-color;
+                }
+            }
+            img {
+                height: 250px;
+            }
+        }
+    }
+    form {
+        margin-top: 50px;
+        ul {
+            margin: 10px 0 30px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        p {
+            display: flex;
+            flex-direction: column;
+            label {
+                margin-bottom: 10px;
+            }
+            input[type=text] {
+                border: 1px solid $light-color;
+                outline: none;
+                border-radius: 8px;
+                width: 600px;
+                height: 40px;
+                padding: 0 10px;
+                margin-bottom: 30px;
+                &:focus {
+                    border: 1px solid $primary-color;
+                }
+            }
+            textarea{
+                border: 1px solid $light-color;
+                outline: none;
+                border-radius: 8px;
+                width: 600px;
+                padding: 10px 10px;
+                margin-bottom: 30px;
+                resize: none;
+                &:focus {
+                    border: 1px solid $primary-color;
+                }
+            }
+            input[type=file]{
+                width: 600px;
+            }
+        }
+        .btn {
+            float: right;
+        }
+    }
+    &_btn {
+        display: flex;
+        justify-content: flex-end;
+    }
 }
