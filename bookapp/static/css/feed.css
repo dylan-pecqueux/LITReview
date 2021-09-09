@@ -1,3 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; }
+
+ul {
+  list-style: none; }
+
+a {
+  text-decoration: none;
+  color: black; }
+  a:hover {
+    color: white; }
+
+header nav {
+  background-color: #20b2e8;
+  height: 60px;
+  display: flex;
+  align-items: center; }
+  header nav .nav_title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    left: 43%; }
+    header nav .nav_title img {
+      margin-right: 10px;
+      width: 50px; }
+  header nav .nav_links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%; }
+    header nav .nav_links a {
+      color: #2f2f2f;
+      margin-right: 20px;
+      font-size: 20px; }
+      header nav .nav_links a:hover {
+        color: white; }
+
+.btn {
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  box-sizing: border-box; }
+
+.btn-light {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  box-sizing: border-box; }
+
+.btn-medium {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-sizing: border-box; }
+
+.btn-primary {
+  border: 1px solid #20b2e8;
+  background-color: #20b2e8;
+  color: white;
+  box-sizing: border-box; }
+  .btn-primary:hover {
+    border: 1px solid #20b2e8;
+    color: #20b2e8;
+    background-color: white;
+    box-sizing: border-box; }
+
+.btn-outline-primary {
+  border: 1px solid #20b2e8;
+  color: #20b2e8;
+  background-color: white;
+  box-sizing: border-box; }
+  .btn-outline-primary:hover {
+    border: 1px solid #20b2e8;
+    background-color: #20b2e8;
+    color: white;
+    box-sizing: border-box; }
+
 .feed {
   width: 90%;
   margin: 50px auto;
@@ -8,19 +90,40 @@
     margin-bottom: 50px; }
     .feed_link a {
       border: 1px solid;
-      padding: 5px; }
+      padding: 10px; }
 
 .feed_posts p, .page-posts p {
-  font-size: 18px; }
+  font-size: 17px; }
 
 .feed_posts .ticket, .page-posts .ticket {
-  padding: 10px;
-  border: 1px solid;
+  width: 600px;
+  margin-top: 10px;
+  border: 1px solid #20b2e8;
+  padding: 10px 20px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px; }
+  align-items: flex-start; }
+  .feed_posts .ticket h2, .page-posts .ticket h2 {
+    margin-bottom: 15px; }
+  .feed_posts .ticket p, .page-posts .ticket p {
+    margin-bottom: 20px; }
+  .feed_posts .ticket_date, .page-posts .ticket_date {
+    font-size: 13px;
+    color: #20b2e8; }
+  .feed_posts .ticket div, .page-posts .ticket div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .feed_posts .ticket div span, .page-posts .ticket div span {
+      color: #20b2e8; }
   .feed_posts .ticket img, .page-posts .ticket img {
-    width: 300px; }
+    height: 250px;
+    margin-bottom: 10px; }
+  .feed_posts .ticket span, .page-posts .ticket span {
+    width: 100%; }
+    .feed_posts .ticket span a, .page-posts .ticket span a {
+      float: right; }
 
 .feed_posts .review, .page-posts .review {
   padding: 10px;

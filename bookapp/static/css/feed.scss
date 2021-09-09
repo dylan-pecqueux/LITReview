@@ -1,3 +1,5 @@
+@import "./base.scss";
+
 .feed {
     width: 90%;
     margin: 50px auto;
@@ -8,23 +10,51 @@
         margin-bottom: 50px;
         a {
             border: 1px solid;
-            padding: 5px;
+            padding: 10px;
         }
     }
 }
 
 .feed_posts, .page-posts{
     p {
-        font-size: 18px;
+        font-size: 17px;
     }
     .ticket {
-        padding: 10px;
-        border: 1px solid;
+        width: 600px;
+        margin-top: 10px;
+        border: 1px solid $primary-color;
+        padding: 10px 20px;
         display: flex;
         flex-direction: column;
-        margin-bottom: 20px;
+        align-items: flex-start;
+        h2 {
+            margin-bottom: 15px;;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        &_date {
+            font-size: 13px;
+            color: $primary-color;
+        }
+        div {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            span {
+                color: $primary-color;
+            }
+        }
         img {
-            width: 300px;
+            height: 250px;
+            margin-bottom: 10px;
+        }
+        span {
+            width: 100%;
+            a {
+            float: right;
+            }
         }
     }
     .review {

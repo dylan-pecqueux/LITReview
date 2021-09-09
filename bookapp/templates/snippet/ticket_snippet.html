@@ -1,15 +1,20 @@
 <li class="ticket">
-    {% if request.user == post.user %}
-        <p>vous avez demandé une critique</p>
-    {% else %}
-        <p>{{post.user.username}} a demandé une critique</p>
-    {% endif %}
+    <div>
+        {% if request.user == post.user %}
+            <p>vous avez demandé une critique</p>
+        {% else %}
+            <p>{{post.user.username}} a demandé une critique</p>
+        {% endif %}
+        <p class="ticket_date">{{ post.time_created.time }}, {{ post.time_created.date }}</p>
+    </div>
     <h2>{{post.title}}</h2>
-    <p>{{post.description}}</p>
+    {% if post.description %}
+        <p>{{ post.description }}</p>
+    {% endif %}
     {% if post.image %}
         <img src="{{media_url}}{{post.image}}">
     {% endif %}
     {% if post not in ticket_response %}
-        <a href="{% url 'bookapp:new_review' post.pk %}">Créer une critique</a>
+        <span><a href="{% url 'bookapp:new_review' post.pk %}" class="btn-medium btn-primary">Créer une critique</a></span>
     {% endif %}
 </li>

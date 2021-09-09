@@ -51,6 +51,13 @@ header nav {
   cursor: pointer;
   box-sizing: border-box; }
 
+.btn-medium {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-sizing: border-box; }
+
 .btn-primary {
   border: 1px solid #20b2e8;
   background-color: #20b2e8;
@@ -218,8 +225,5 @@ header nav {
         width: 600px; }
     .review-form form .btn {
       float: right; }
-  .review-form_btn {
-    display: flex;
-    justify-content: flex-end; }
 
 /*# sourceMappingURL=review-form.css.map */

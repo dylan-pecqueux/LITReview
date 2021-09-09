@@ -51,7 +51,7 @@ header nav {
     }
 }
 
-.btn{
+.btn {
     padding: 15px;
     border-radius: 8px;
     font-size: 18px;
@@ -59,10 +59,18 @@ header nav {
     box-sizing: border-box;
 }
 
-.btn-light{
+.btn-light {
     padding: 10px;
     border-radius: 8px;
     font-size: 12px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.btn-medium {
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
     box-sizing: border-box;
 }
