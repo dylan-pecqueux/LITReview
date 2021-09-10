@@ -8,6 +8,10 @@ $light-color: rgb(47, 47, 47);
     align-items: center;
 }
 
+@mixin responsive {
+    @media (max-width: 1050px) { @content; }
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -34,6 +38,11 @@ header nav {
     height: 60px;
     display: flex;
     align-items: center;
+    @include responsive {
+        height: 80px;
+        flex-direction: column;
+        justify-content: center;
+    }
     .nav_title {
         position: absolute;
         width: 100%;
@@ -41,6 +50,9 @@ header nav {
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        @include responsive {
+            position: relative;
+        }
         img {
             margin-right: 10px;
             width: 50px;
@@ -53,6 +65,10 @@ header nav {
         width: 100%;
         overflow: visible;
         z-index: 1;
+        @include responsive {
+            margin-top: 5px;
+            justify-content: center;
+        }
         a{
             color: $light-color;
             margin-right: 20px;

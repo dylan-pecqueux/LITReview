@@ -20,6 +20,11 @@ header nav {
   height: 60px;
   display: flex;
   align-items: center; }
+  @media (max-width: 1050px) {
+    header nav {
+      height: 80px;
+      flex-direction: column;
+      justify-content: center; } }
   header nav .nav_title {
     position: absolute;
     width: 100%;
@@ -27,6 +32,9 @@ header nav {
     justify-content: center;
     align-items: center;
     overflow: hidden; }
+    @media (max-width: 1050px) {
+      header nav .nav_title {
+        position: relative; } }
     header nav .nav_title img {
       margin-right: 10px;
       width: 50px; }
@@ -37,6 +45,10 @@ header nav {
     width: 100%;
     overflow: visible;
     z-index: 1; }
+    @media (max-width: 1050px) {
+      header nav .nav_links {
+        margin-top: 5px;
+        justify-content: center; } }
     header nav .nav_links a {
       color: #2f2f2f;
       margin-right: 20px;

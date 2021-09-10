@@ -16,6 +16,9 @@
         box-shadow: 0px 24px 9px -21px rgba(0,0,0,0.55);
         -webkit-box-shadow: 0px 24px 9px -21px rgba(0,0,0,0.55);
         -moz-box-shadow: 0px 24px 9px -21px rgba(0,0,0,0.55);
+        @include responsive {
+            top: 80px;
+        }
         a {
             margin: 0 10px;
             border: 1px solid;
