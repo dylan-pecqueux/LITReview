@@ -21,18 +21,18 @@ Projet 9 de la formation DA Python de OpenClassrooms qui consiste à créer un s
 ## Navigation dans l'application
 
 * Accès Admin :  
-                - username : admin  
-                - password : azerty
+    - username : admin  
+    - password : azerty
 
 * Comptes utilisateur :  
-                        - username : moi
-                        - password : zftaazsbnzzx
+    - username : moi
+    - password : zftaazsbnzzx
 
-                        - username : lautre
-                        - password : zftaazsbnzzx
+    - username : lautre
+    - password : zftaazsbnzzx
 
-                        - username : pasmoi
-                        - password : zftaazsbnzzx
+    - username : pasmoi
+    - password : zftaazsbnzzx
 
 Une fois dans l'application vous avez la possibilité de :
  - Créer un compte utilisateur
