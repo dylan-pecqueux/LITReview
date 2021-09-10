@@ -20,10 +20,12 @@ Projet 9 de la formation DA Python de OpenClassrooms qui consiste à créer un s
 
 ## Navigation dans l'application
 
-* Accès Admin : - username : admin
+* Accès Admin : 
+                - username : admin
                 - password : azerty
 
-* Comptes utilisateur : - username : moi
+* Comptes utilisateur : 
+                        - username : moi
                         - password : zftaazsbnzzx
 
                         - username : lautre
