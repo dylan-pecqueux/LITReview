@@ -15,25 +15,19 @@
 }
 
 .home-page_register{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include center;
     a {
         margin-top: 50px;
     }
 }
 
 .home-page_login{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include center;
     h2{
         margin-bottom: 60px;
     }
     form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @include center;
         p {
             margin-bottom: 30px;
             input {

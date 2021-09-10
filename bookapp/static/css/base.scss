@@ -2,6 +2,12 @@ $primary-color: rgb(32, 178, 232);
 $secondary-color: rgb(24, 133, 172);
 $light-color: rgb(47, 47, 47);
 
+@mixin center {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -22,14 +28,19 @@ a {
 
 header nav {
     background-color: $primary-color;
+    position: fixed;
+    width: 100%;
+    top: 0;
     height: 60px;
     display: flex;
     align-items: center;
     .nav_title {
-        position: relative;
+        position: absolute;
+        width: 100%;
         display: flex;
+        justify-content: center;
         align-items: center;
-        left: 43%;
+        overflow: hidden;
         img {
             margin-right: 10px;
             width: 50px;
@@ -40,6 +51,8 @@ header nav {
         justify-content: flex-end;
         align-items: center;
         width: 100%;
+        overflow: visible;
+        z-index: 1;
         a{
             color: $light-color;
             margin-right: 20px;

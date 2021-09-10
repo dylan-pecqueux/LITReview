@@ -9,8 +9,8 @@
 {% block page %}
     <main class="feed">
         <section class="feed_link">
-            <a href="{% url 'bookapp:new_ticket' %}" class="btn btn-primary">Créer ticket</a>
-            <a href="{% url 'bookapp:new_ticket_and_review' %}" class="btn btn-primary">Créer une critique</a>
+            <a href="{% url 'bookapp:new_ticket' %}" class="btn btn-outline-primary">Créer ticket</a>
+            <a href="{% url 'bookapp:new_ticket_and_review' %}" class="btn btn-outline-primary">Créer une critique</a>
         </section>
         <section class="feed_posts">
             {% if posts %}

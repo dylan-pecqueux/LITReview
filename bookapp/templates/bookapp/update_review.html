@@ -1,9 +1,34 @@
 {% extends 'bookapp/base.html' %}
+{% load sass_tags %}
+{% load static %}
+
+{% block extrahead %}
+    <link href="{% sass_src 'css/review-form.scss' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block page %}
-    <form method="POST" action="{% url 'bookapp:update_review' review.pk %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Update">
-    </form>
+    <main class="review-form">
+        <h2>Modifier une critique</h2>
+        <section class="review-form_ticket">
+            <p>Vous êtes en train de poster en réponse à</p>
+            <div class="review-form_ticket_description">
+                <div>
+                    <p><span>{{ review.ticket.user.username }}</span> a demandé une critique</p>
+                    <p class="review-form_ticket_description_date">{{ review.ticket.time_created.time }}, {{ review.ticket.time_created.date }}</p>
+                </div>
+                <h3>{{ review.ticket.title }}</h3>
+                {% if review.ticket.description %}
+                    <p>{{ review.ticket.description }}</p>
+                {% endif %}
+                {% if review.ticket.image %}
+                    <img src="{{media_url}}{{review.ticket.image}}">
+                {% endif %}
+            </div>
+        </section>
+        <form method="POST" action="{% url 'bookapp:update_review' review.pk %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update">
+        </form>
+    </main>
 {% endblock %}

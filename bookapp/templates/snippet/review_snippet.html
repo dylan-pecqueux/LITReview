@@ -1,16 +1,42 @@
+{% load static %}
+
 <li class="review">
     <div class="review_post">
-        {% if request.user == post.user %}
-            <p>vous avez publié une critique</p>
-        {% else %}
-            <p>{{post.user.username}} a publié une critique</p>
+        <div class="review_post_header">
+            {% if request.user == post.user %}
+                <p>vous avez publié une critique</p>
+            {% else %}
+                <p>{{post.user.username}} a publié une critique</p>
+            {% endif %}
+            <p class="review_post_date">{{ post.time_created.time }}, {{ post.time_created.date }}</p>
+        </div>
+        <div class="review_post_title">
+            <h2>{{post.headline}}</h2>
+            <span>-</span>
+            <img src="{% static 'images/ratings-' %}{{post.rating}}.png" alt="ratings of book">
+        </div>
+        {% if post.body %}
+            <p>{{post.body}}</p>
         {% endif %}
-        <h2>{{post.headline}}</h2>
-        <p>{{post.rating}}</p>
-        <p>{{post.body}}</p>
     </div>
     <div class="review_ticket">
-        <p>Ticket - {{post.ticket.user.username}}</p>
-        <p>{{post.ticket.title}}</p>
+        <div class="review_ticket_header">
+            {% if request.user == post.ticket.user %}
+                <p>vous avez demandé une critique</p>
+            {% else %}
+                <p>{{post.ticket.user.username}} a demandé une critique</p>
+            {% endif %}
+            <p class="ticket_date">{{ post.ticket.time_created.time }}, {{ post.ticket.time_created.date }}</p>
+        </div>
+        <h2>{{post.ticket.title}}</h2>
+        {% if post.ticket.description %}
+            <p>{{ post.ticket.description }}</p>
+        {% endif %}
+        {% if post.ticket.image %}
+            <img src="{{media_url}}{{post.ticket.image}}">
+        {% endif %}
+        {% if post.ticket not in ticket_response %}
+            <span><a href="{% url 'bookapp:new_review' post.pk %}" class="btn-medium btn-primary">Créer une critique</a></span>
+        {% endif %}
     </div>
 </li>

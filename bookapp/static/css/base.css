@@ -14,14 +14,19 @@ a {
 
 header nav {
   background-color: #20b2e8;
+  position: fixed;
+  width: 100%;
+  top: 0;
   height: 60px;
   display: flex;
   align-items: center; }
   header nav .nav_title {
-    position: relative;
+    position: absolute;
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
-    left: 43%; }
+    overflow: hidden; }
     header nav .nav_title img {
       margin-right: 10px;
       width: 50px; }
@@ -29,7 +34,9 @@ header nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 100%; }
+    width: 100%;
+    overflow: visible;
+    z-index: 1; }
     header nav .nav_links a {
       color: #2f2f2f;
       margin-right: 20px;

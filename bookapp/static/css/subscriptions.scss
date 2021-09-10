@@ -1,14 +1,10 @@
 @import "./base.scss";
 
 .sub {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+    @include center;
+    margin: 110px 0 50px 0;
     &_search{
-        display:flex;
-        flex-direction: column;
-        align-items: center;
+        @include center;
         form {
             margin-top: 30px;
             input[type=text] {
@@ -26,9 +22,7 @@
     }
     &_follow {
         margin-top: 50px;
-        display:flex;
-        flex-direction: column;
-        align-items: center;
+        @include center;
         ul {
             margin-top: 40px;
             li {
@@ -45,9 +39,7 @@
     }
     &_followers {
         margin-top: 50px;
-        display:flex;
-        flex-direction: column;
-        align-items: center;
+        @include center;
         ul {
             margin-top: 40px;
             li {

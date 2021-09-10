@@ -14,14 +14,19 @@ a {
 
 header nav {
   background-color: #20b2e8;
+  position: fixed;
+  width: 100%;
+  top: 0;
   height: 60px;
   display: flex;
   align-items: center; }
   header nav .nav_title {
-    position: relative;
+    position: absolute;
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
-    left: 43%; }
+    overflow: hidden; }
     header nav .nav_title img {
       margin-right: 10px;
       width: 50px; }
@@ -29,7 +34,9 @@ header nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 100%; }
+    width: 100%;
+    overflow: visible;
+    z-index: 1; }
     header nav .nav_links a {
       color: #2f2f2f;
       margin-right: 20px;
@@ -81,14 +88,25 @@ header nav {
     box-sizing: border-box; }
 
 .feed {
-  width: 90%;
-  margin: 50px auto;
+  margin: 50px 0;
   display: flex;
   flex-direction: column;
   align-items: center; }
   .feed_link {
-    margin-bottom: 50px; }
+    position: sticky;
+    top: 60px;
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: white;
+    margin-bottom: 50px;
+    box-shadow: 0px 24px 9px -21px rgba(0, 0, 0, 0.55);
+    -webkit-box-shadow: 0px 24px 9px -21px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: 0px 24px 9px -21px rgba(0, 0, 0, 0.55); }
     .feed_link a {
+      margin: 0 10px;
       border: 1px solid;
       padding: 10px; }
 
@@ -97,7 +115,7 @@ header nav {
 
 .feed_posts .ticket, .page-posts .ticket {
   width: 600px;
-  margin-top: 10px;
+  margin-bottom: 20px;
   border: 1px solid #20b2e8;
   padding: 10px 20px;
   display: flex;
@@ -110,12 +128,12 @@ header nav {
   .feed_posts .ticket_date, .page-posts .ticket_date {
     font-size: 13px;
     color: #20b2e8; }
-  .feed_posts .ticket div, .page-posts .ticket div {
+  .feed_posts .ticket_header, .page-posts .ticket_header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center; }
-    .feed_posts .ticket div span, .page-posts .ticket div span {
+    .feed_posts .ticket_header span, .page-posts .ticket_header span {
       color: #20b2e8; }
   .feed_posts .ticket img, .page-posts .ticket img {
     height: 250px;
@@ -126,21 +144,77 @@ header nav {
       float: right; }
 
 .feed_posts .review, .page-posts .review {
-  padding: 10px;
-  border: 1px solid;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px; }
+  align-items: center;
+  padding: 10px 20px;
+  border: 1px solid #20b2e8;
+  margin-bottom: 20px;
+  width: 600px; }
   .feed_posts .review_ticket, .page-posts .review_ticket {
+    width: 550px;
     margin-top: 10px;
-    border: 1px solid;
-    padding: 10px; }
+    border: 1px solid #20b2e8;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; }
+    .feed_posts .review_ticket h2, .page-posts .review_ticket h2 {
+      margin-bottom: 10px; }
+    .feed_posts .review_ticket p, .page-posts .review_ticket p {
+      margin-bottom: 10px; }
+    .feed_posts .review_ticket_date, .page-posts .review_ticket_date {
+      font-size: 13px;
+      color: #20b2e8; }
+    .feed_posts .review_ticket_header, .page-posts .review_ticket_header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      .feed_posts .review_ticket_header span, .page-posts .review_ticket_header span {
+        color: #20b2e8; }
+    .feed_posts .review_ticket img, .page-posts .review_ticket img {
+      height: 180px;
+      margin-bottom: 10px; }
+    .feed_posts .review_ticket span, .page-posts .review_ticket span {
+      width: 100%; }
+      .feed_posts .review_ticket span a, .page-posts .review_ticket span a {
+        float: right; }
+  .feed_posts .review_post, .page-posts .review_post {
+    width: 580px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; }
+    .feed_posts .review_post p, .page-posts .review_post p {
+      margin-bottom: 10px; }
+    .feed_posts .review_post_date, .page-posts .review_post_date {
+      font-size: 13px;
+      color: #20b2e8; }
+    .feed_posts .review_post_title, .page-posts .review_post_title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px; }
+      .feed_posts .review_post_title span, .page-posts .review_post_title span {
+        margin: 0 10px; }
+      .feed_posts .review_post_title img, .page-posts .review_post_title img {
+        height: 20px; }
+    .feed_posts .review_post_header, .page-posts .review_post_header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
 
 .page-posts {
-  width: 90%;
-  margin: 50px auto;
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  margin: 110px 0 50px 0; }
+  .page-posts .btn-group {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; }
+    .page-posts .btn-group a {
+      margin: 10px 10px 0 0; }
 
 /*# sourceMappingURL=feed.css.map */

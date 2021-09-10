@@ -1,18 +1,14 @@
 @import "./base.scss";
 
 .ticket-review{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 50px 0;
+    @include center;
+    margin: 110px 0 50px 0;
     &_ticket {
         margin-top: 40px;
         border: 1px solid $primary-color;
         padding: 20px 40px;
         &_form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            @include center;
             margin-top: 50px;
             p {
                 display: flex;
@@ -104,11 +100,9 @@
 }
 
 .review-form {
-    margin: 50px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include center;
     justify-content: center;
+    margin: 110px 0 50px 0;
     &_ticket {
         width: 650px;
         margin-top: 40px;

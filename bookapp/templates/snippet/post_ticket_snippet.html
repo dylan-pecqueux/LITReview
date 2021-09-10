@@ -1,14 +1,21 @@
 <li class="ticket">
-    {% if request.user == post.user %}
-        <p>vous avez demandé une critique</p>
-    {% else %}
-        <p>{{post.user.username}} a demandé une critique</p>
-    {% endif %}
+    <div class="ticket_header">
+        {% if request.user == post.user %}
+            <p>vous avez demandé une critique</p>
+        {% else %}
+            <p>{{post.user.username}} a demandé une critique</p>
+        {% endif %}
+        <p class="ticket_date">{{ post.time_created.time }}, {{ post.time_created.date }}</p>
+    </div>
     <h2>{{post.title}}</h2>
-    <p>{{post.description}}</p>
+    {% if post.description %}
+        <p>{{ post.description }}</p>
+    {% endif %}
     {% if post.image %}
         <img src="{{media_url}}{{post.image}}">
     {% endif %}
-    <a href="{% url 'bookapp:update_ticket' post.pk %}">Modifier</a>
-    <a href="{% url 'bookapp:delete_ticket' post.pk %}">Delete</a>
+    <div class="btn-group">
+        <a href="{% url 'bookapp:update_ticket' post.pk %}" class="btn-medium btn-primary">Modifier</a>
+        <a href="{% url 'bookapp:delete_ticket' post.pk %}" class="btn-medium btn-outline-primary">Supprimer</a>
+    </div>
 </li>
