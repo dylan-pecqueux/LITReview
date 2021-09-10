@@ -16,6 +16,30 @@ Projet 9 de la formation DA Python de OpenClassrooms qui consiste à créer un s
 ## Démarrage
 
 - Lancer le serveur : ``python manage.py runserver``
+- Ouvrir le navigateur web à l'adresse suivant : ``http://127.0.0.1:8000/``
+
+## Navigation dans l'application
+
+* Accès Admin : - username : admin
+                - password : azerty
+
+* Comptes utilisateur : - username : moi
+                        - password : zftaazsbnzzx
+
+                        - username : lautre
+                        - password : zftaazsbnzzx
+
+                        - username : pasmoi
+                        - password : zftaazsbnzzx
+
+Une fois dans l'application vous avez la possibilité de :
+ - Créer un compte utilisateur
+ - Créer un ticket (demande de critique d'un livre ou article)
+ - Créer une critique en réponse à un ticket
+ - Créer une critique sans ticket
+ - Modifier/Supprimer une critique ou un ticket que j'ai créé
+ - Voir les utilisateurs que je suis et qui me suivent
+ - Ajouter ou supprimer les utilisateurs que je suis
 
 ## Fabriqué avec
 
