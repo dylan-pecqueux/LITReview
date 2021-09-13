@@ -44,6 +44,9 @@ def new_ticket(request):
 
 @login_required(login_url='/')
 def feed(request):
+    """Regroup ticket and review from user followed sorted by created date
+        Use anotate for use different template between ticket and review"""
+
     my_tickets = Ticket.objects.filter(user=request.user)
     response_to_my_reviews = Review.objects.filter(ticket__in=my_tickets)
     response_to_my_reviews = response_to_my_reviews.annotate(
@@ -58,16 +61,21 @@ def feed(request):
     tickets = Ticket.objects.filter(my_filter_qs)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     ticket_response = [i.ticket for i in Review.objects.filter(user=request.user)]
-    posts = sorted(
-        chain(reviews, tickets, response_to_my_reviews), 
-        key=lambda post: post.time_created, 
+    sorted_posts = sorted(
+        chain(reviews, tickets, response_to_my_reviews),
+        key=lambda post: post.time_created,
         reverse=True
     )
-    context = {'posts': posts, 'media_url':settings.MEDIA_URL, 'ticket_response':ticket_response}
+    context = {
+        'posts': sorted_posts,
+        'media_url':settings.MEDIA_URL,
+        'ticket_response':ticket_response
+    }
     return render(request, 'bookapp/feed.html', context)
 
 @login_required(login_url='/')
 def subscriptions(request):
+    """See followed users, user follow and add followed user"""
     followed_by = UserFollows.objects.filter(user=request.user)
     sub = UserFollows.objects.filter(followed_user=request.user)
     if request.method == 'POST':
@@ -113,12 +121,13 @@ def new_review(request, pk):
             return redirect(reverse('bookapp:feed'))
     else:
         form = ReviewForm()
-    
+
     context = {'form': form, 'ticket': ticket, 'media_url':settings.MEDIA_URL}
     return render(request, 'bookapp/new_review.html', context)
 
 @login_required(login_url='/')
 def new_ticket_and_review(request):
+    """Create a review without existing ticket"""
     if request.method == 'POST':
         ticket_form = TicketForm(request.POST, request.FILES)
         if ticket_form.is_valid():
@@ -141,26 +150,32 @@ def new_ticket_and_review(request):
 
 @login_required(login_url='/')
 def posts(request):
+    """See all tickets and review by the current user"""
     reviews = Review.objects.filter(user=request.user)
     reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
     tickets = Ticket.objects.filter(user=request.user)
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
-    posts = sorted(
-        chain(reviews, tickets), 
-        key=lambda post: post.time_created, 
+    sorted_posts = sorted(
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
         reverse=True
     )
-    return render(request, 'bookapp/posts.html', {'posts': posts, 'media_url':settings.MEDIA_URL})
+    context = {'posts': sorted_posts, 'media_url':settings.MEDIA_URL}
+    return render(request, 'bookapp/posts.html', context)
 
 @login_required(login_url='/')
 def update_review(request, pk):
     review = get_object_or_404(Review, pk=pk)
-    context = {'review': review}
-    form = ReviewForm(request.POST or None, instance=review)
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('bookapp:posts'))
-    context["form"] = form
+    if request.user == review.user:
+        context = {'review': review, 'media_url':settings.MEDIA_URL}
+        form = ReviewForm(request.POST or None, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('bookapp:posts'))
+        context["form"] = form
+    else:
+        return redirect(reverse('bookapp:feed'))
+
     return render(request, 'bookapp/update_review.html', context)
 
 @login_required(login_url='/')
@@ -173,12 +188,16 @@ def delete_review(request, pk):
 @login_required(login_url='/')
 def update_ticket(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk)
-    context = {'ticket': ticket}
-    form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('bookapp:posts'))
-    context["form"] = form
+    if request.user == ticket.user:
+        context = {'ticket': ticket}
+        form = TicketForm(request.POST or None, request.FILES or None, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('bookapp:posts'))
+        context["form"] = form
+    else:
+        return redirect(reverse('bookapp:feed'))
+
     return render(request, 'bookapp/update_ticket.html', context)
 
 @login_required(login_url='/')
