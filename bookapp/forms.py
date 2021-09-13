@@ -1,6 +1,6 @@
 from django import forms
-from .models import Ticket, Review
 from django.contrib.auth.forms import UserCreationForm
+from .models import Ticket, Review
 
 RATINGS_CHOICE = [(i, i) for i in range(6)]
 

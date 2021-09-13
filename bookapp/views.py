@@ -1,13 +1,12 @@
 from itertools import chain
 from django.db.models import CharField, Value, Q
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse
+from django.conf import settings
 from .models import Ticket, UserFollows, Review
 from .forms import TicketForm, ReviewForm, AccountCreationForm
-from django.conf import settings
 
 
 def index(request):
@@ -26,7 +25,7 @@ def register(request):
             return redirect(reverse('bookapp:feed'))
     else:
         form = AccountCreationForm()
-        
+
     context = {'form': form}
     return render(request, 'registration/register.html', context)
 
@@ -35,9 +34,9 @@ def new_ticket(request):
     if request.method == 'POST':
         form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
-            m = form.save(commit=False)
-            m.user = request.user
-            m.save()
+            save = form.save(commit=False)
+            save.user = request.user
+            save.save()
             return redirect(reverse('bookapp:feed'))
     else:
         form = TicketForm()
@@ -47,7 +46,8 @@ def new_ticket(request):
 def feed(request):
     my_tickets = Ticket.objects.filter(user=request.user)
     response_to_my_reviews = Review.objects.filter(ticket__in=my_tickets)
-    response_to_my_reviews = response_to_my_reviews.annotate(content_type=Value('REVIEW', CharField()))
+    response_to_my_reviews = response_to_my_reviews.annotate(
+        content_type=Value('REVIEW', CharField()))
     user_followed = UserFollows.objects.filter(followed_user=request.user)
     my_filter_qs = Q()
     for user in user_followed:
@@ -63,7 +63,8 @@ def feed(request):
         key=lambda post: post.time_created, 
         reverse=True
     )
-    return render(request, 'bookapp/feed.html', {'posts': posts, 'media_url':settings.MEDIA_URL, 'ticket_response':ticket_response})
+    context = {'posts': posts, 'media_url':settings.MEDIA_URL, 'ticket_response':ticket_response}
+    return render(request, 'bookapp/feed.html', context)
 
 @login_required(login_url='/')
 def subscriptions(request):
@@ -89,7 +90,8 @@ def subscriptions(request):
     else:
         message = None
 
-    return render(request, 'bookapp/subscriptions.html', {'sub': sub, 'followed_by': followed_by, 'message': message})
+    context = {'sub': sub, 'followed_by': followed_by, 'message': message}
+    return render(request, 'bookapp/subscriptions.html', context)
 
 @login_required(login_url='/')
 def delete_sub(request, pk):
@@ -111,7 +113,9 @@ def new_review(request, pk):
             return redirect(reverse('bookapp:feed'))
     else:
         form = ReviewForm()
-    return render(request, 'bookapp/new_review.html', {'form': form, 'ticket': ticket, 'media_url':settings.MEDIA_URL})
+    
+    context = {'form': form, 'ticket': ticket, 'media_url':settings.MEDIA_URL}
+    return render(request, 'bookapp/new_review.html', context)
 
 @login_required(login_url='/')
 def new_ticket_and_review(request):
@@ -131,7 +135,9 @@ def new_ticket_and_review(request):
     else:
         ticket_form = TicketForm()
         review_form = ReviewForm()
-    return render(request, 'bookapp/new_ticket_and_review.html', {'ticket_form': ticket_form, 'review_form': review_form})
+
+    context = {'ticket_form': ticket_form, 'review_form': review_form}
+    return render(request, 'bookapp/new_ticket_and_review.html', context)
 
 @login_required(login_url='/')
 def posts(request):
