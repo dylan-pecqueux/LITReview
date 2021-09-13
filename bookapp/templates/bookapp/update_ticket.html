@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extrahead %}
-    <link href="{% sass_src 'css/form.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'scss/form.scss' %}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block page %}
@@ -12,7 +12,7 @@
         <form method="POST" action="{% url 'bookapp:update_ticket' ticket.pk %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Modifier">
+            <input type="submit" value="Modifier" class="btn btn-primary">
         </form>
     </main>
 {% endblock %}

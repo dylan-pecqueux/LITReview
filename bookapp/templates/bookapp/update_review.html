@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extrahead %}
-    <link href="{% sass_src 'css/review-form.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'scss/review-form.scss' %}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block page %}
@@ -28,7 +28,7 @@
         <form method="POST" action="{% url 'bookapp:update_review' review.pk %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Update">
+            <input type="submit" value="Update" class="btn btn-primary">
         </form>
     </main>
 {% endblock %}
